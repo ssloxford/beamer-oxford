@@ -4,6 +4,9 @@
 \ProvidesPackage{beamerthemeOxford}[2022/06/15]
 \RequirePackage{ifthen}
 
+\def\altlogo{}
+\DeclareOptionBeamer{altlogo}{\def\altlogo{#1}}
+
 \def\havefoundrysterling{true}
 \DeclareOptionBeamer{nofoundrysterling}{\def\havefoundrysterling{false}}
 
@@ -47,7 +50,6 @@
 % Redefine vertical navigation to embolden the section heading of active subsections
 \makeatletter
 \def\insertverticalnavigation#1{%
-  \insertlogo
   \vbox{%
     \def\sectionentry##1##2##3##4##5{%
       \ifnum##5=\c@part%
@@ -129,6 +131,14 @@
   \hspace{0.03\beamer@sidebarwidth}
   \includegraphics[width=0.9\beamer@sidebarwidth]{oxweb-logo-square.png}%
 
+  \ifthenelse{\equal{\altlogo}{}}%
+    {}%
+    {%
+      \vspace*{0.06cm}%
+      \hspace{0.03\beamer@sidebarwidth}
+      \includegraphics[width=0.9\beamer@sidebarwidth]{\altlogo}%
+    }%
+
   \beamer@tempdim=\beamer@sidebarwidth%
   \advance\beamer@tempdim by -6pt%
 }
@@ -149,7 +159,7 @@
         \vskip2pt%
       \fi%
     }%
-  }
+  }%
   {}
 
 \makeatother
@@ -158,15 +168,15 @@
 \setbeamerfont{section in sidebar}{series=\bfseries}
 
 % Make footer
-\setbeamertemplate{footline}{
-    \begin{beamercolorbox}[wd=\paperwidth,ht=0.15in,dp=1ex,center]{footer}
-        \insertshorttitle\hfill
-        \insertframenumber\hfill
-        \insertshortauthor
-        % TODO: insert the conference name
-        %\insertshortdate\hspace{1em}
-    \end{beamercolorbox}
-}
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.15in,dp=0.075in,leftskip=0.5cm,rightskip=0.5cm]{footer}%
+    \insertshorttitle\hfill%
+    \insertframenumber\hfill%
+    \insertshortauthor~--~\insertshortinstitute%
+    % TODO: insert the conference name
+    %\insertshortdate\hspace{1em}
+  \end{beamercolorbox}%
+}%
 
 
 % Write the date in the form 1st July 2010 rather than July 1, 2010
