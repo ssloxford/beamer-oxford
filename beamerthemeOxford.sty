@@ -5,11 +5,12 @@
 \RequirePackage{ifthen}
 
 \def\havefoundrysterling{true}
-\DeclareOption{nofoundrysterling}{\def\havefoundrysterling{false}}
-\ProcessOptions
+\DeclareOptionBeamer{nofoundrysterling}{\def\havefoundrysterling{false}}
 
-% TODO: Tidy leftover Hannover package stuff
-\DeclareOptionBeamer{width}
+\def\havesidebar{true}
+\DeclareOptionBeamer{hidesidebar}{\def\havesidebar{false}}
+
+\DeclareOptionBeamer{sidebarwidth}
 {\PassOptionsToPackage{width=#1}{beamerouterthemesidebar}}
 
 \DeclareOptionBeamer{hideothersubsections}
@@ -24,7 +25,9 @@
 % Only set these variables in presentation mode (from Hannover theme)
 \mode<presentation>
   % TODO: apparently there's a dark mode we could use?
-  \useoutertheme[height=0pt,left]{sidebar}
+  \ifthenelse{\equal{\havesidebar}{true}}%
+    {\useoutertheme[height=0pt,left]{sidebar}}
+    {}
   \usecolortheme{Oxford}
   \useinnertheme{circles}
   \setbeamertemplate{frametitle}[default][right]
@@ -127,36 +130,39 @@
 }
 
 % Redefine sidebar to add logo and remove titles
-\setbeamertemplate{sidebar \beamer@sidebarside}
-{
-  \vspace*{0.06cm}
-  \hspace{0.03\beamer@sidebarwidth}
-  \includegraphics[width=0.9\beamer@sidebarwidth]{oxweb-logo-square.png}%
+\ifthenelse{\equal{\havesidebar}{true}}%
+  {
+    \setbeamertemplate{sidebar \beamer@sidebarside}
+    {
+      \vspace*{0.06cm}
+      \hspace{0.03\beamer@sidebarwidth}
+      \includegraphics[width=0.9\beamer@sidebarwidth]{oxweb-logo-square.png}%
 
-  \beamer@tempdim=\beamer@sidebarwidth%
-  \advance\beamer@tempdim by -6pt%
-  \insertverticalnavigation{\beamer@sidebarwidth}%
-  \vfill
-  \ifx\beamer@sidebarside\beamer@lefttext%
-  \else%
-    \usebeamercolor{normal text}%
-    \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
-    \vskip2pt%
-  \fi%
-}%
+      \beamer@tempdim=\beamer@sidebarwidth%
+      \advance\beamer@tempdim by -6pt%
+      \insertverticalnavigation{\beamer@sidebarwidth}%
+      \vfill
+      \ifx\beamer@sidebarside\beamer@lefttext%
+      \else%
+        \usebeamercolor{normal text}%
+        \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+        \vskip2pt%
+      \fi%
+    }%
+  }
+  {}
 
 \makeatother
 
 % Make sidebar section font bold
 \setbeamerfont{section in sidebar}{series=\bfseries}
 
-
 % Make footer
 \setbeamertemplate{footline}{
     \begin{beamercolorbox}[wd=\paperwidth,ht=0.15in,dp=1ex,center]{footer}
         \insertshorttitle\hfill
         \insertframenumber\hfill
-        \insertshortauthor\ --\ \insertshortdate
+        \insertshortauthor
         % TODO: insert the conference name
         %\insertshortdate\hspace{1em}
     \end{beamercolorbox}
