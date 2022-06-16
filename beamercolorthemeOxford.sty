@@ -1,24 +1,130 @@
 \mode<presentation>
 
-\definecolor{OxfordBlue}{RGB}{4,30,66} % https://www.ox.ac.uk/sites/files/oxford/media_wysiwyg/Oxford%20Blue%20LR.pdf
-\definecolor{OxfordLightBlue}{HTML}{122f53}
-
 % Colours from
 % https://web.archive.org/web/20210613194641/https://www.ox.ac.uk/public-affairs/style-guide/digital-style-guide
+
+% Brand colours
+%
+% These are the brand colours that come from Oxford University's brand guidelines.
+%
+% The (dark) Oxford blue is used primarily in general page furniture such as the backgrounds on the header and footer. This makes for a strong brand presence throughout the site. Because it features so strongly in these areas, it is not recommended to use it in large areas elsewhere. However it is used more sparingly in smaller elements such as in event date icons and search/filtering bars.
+% 
+\definecolor{OxfordPrimary}{HTML}{002147}
 \definecolor{OxfordSecondary}{HTML}{a79d96}
 \definecolor{OxfordTertiary}{HTML}{f3f1ee}
+\definecolor{OxfordLightPrimary}{HTML}{122f53}
 
-\setbeamercolor{structure}{fg=OxfordLightBlue}
-%\setbeamercolor{structure}{fg=OxfordLightBlue!90!white}
+% General/secondary colours
+%
+% The wide secondary palette (detailed in the brand toolkit) is used to add visual distinction and texture to design elements as well as signifying page links, call-to-actions (e.g buttons) and active pages in navigational elements.
+%
+% To visually distinguish various areas of pages (the best example being the right-hand sidebar) subtle beige background shades are used (derived from the pantones in the palette). These should be used to separate tertiary content from main content without being over-powering or distracting.
+%
+% Overuse of the beige backgrounds can have the effect of making a page look drab (especially if there are minimal images), so use of this should be carefully considered and balanced with a good amount of white background areas.
+%
+% Secondary colours (derived from the Oxford palette) can be introduced to give specific templates their own distinctiveness and compliment the core Oxford blue used throughout. An example of this are the shades of teal (derived from Pantone 562 in the palette) used in backgrounds. These add visual interest to less common content blocks such as ‘Facts & figures’.
+% 
+\definecolor{OxfordDarkBlue}{HTML}{001c3d}
+\definecolor{OxfordWashedOutBlue}{HTML}{193658}
+\definecolor{OxfordCopyrightGrey}{HTML}{c7c2bc}
+\definecolor{OxfordBeigeGrey}{HTML}{f3f1ec}
+\definecolor{OxfordBrownGrey}{HTML}{001c3d} % Is this correctly named?
+\definecolor{OxfordFilterFormGreen}{HTML}{043946}
+\definecolor{OxfordIconBlueGrey}{HTML}{A1C4D0}
+\definecolor{OxfordTeal}{HTML}{003947}
+\definecolor{OxfordVeryLightBlue}{HTML}{f0f5f8}
+\definecolor{OxfordCookieBar}{HTML}{00152e}
+\definecolor{OxfordBlueGrey}{HTML}{353c47}
 
-\setbeamercolor{palette primary}{fg=OxfordBlue}
+% Link colours
+%
+% Light blue (derived from Pantone 279 in the palette) is used to indicate general actions (links and buttons). Hence, it is also used in various navigational elements such as the block rollover effect on the drop down menus. However, many ever-present navigational links (such as those in the header/footer) do not use this light blue link colour so as not to distract from the main page content and more contextual related links in the sidebar.
+%
+% A distinctive red colour (derived from Pantone 200 in the palette) is used sparingly to highlight key/primary call to actions (for example the ‘APPLY’ button on the course template). This is to give it more visibility over other actions on the page of less importance.
+% 
+\definecolor{OxfordLink}{HTML}{3277ae}
+\definecolor{OxfordLinkHover}{HTML}{44687d}
+\definecolor{OxfordAltLinkHover}{HTML}{be0f34}
+\definecolor{OxfordLinkHeader}{HTML}{70a9d6}
+\definecolor{OxfordLinkOverlay}{HTML}{98c1e1}
+
+% Shades
+% 
+\definecolor{OxfordBlack}{HTML}{000000}
+\definecolor{OxfordOffBlack}{HTML}{333333}
+\definecolor{OxfordMidGrey}{HTML}{7a736e}
+\definecolor{OxfordDarkGrey}{HTML}{a6a6a6}
+\definecolor{OxfordLightGrey}{HTML}{e0ded9}
+\definecolor{OxfordVLightGrey}{HTML}{f9f8f5}
+\definecolor{OxfordWhite}{HTML}{ffffff}
+
+% Custom blog colours
+%
+% As mentioned previously, secondary colours are used to give specific templates their own distinctiveness. The blogs are an example of this -they have their own subtle colour theming coupled with a slightly different typographic approach to the main headings.
+% 
+\definecolor{OxfordScienceBlog}{HTML}{0f7361}
+\definecolor{OxfordScienceBlogButton}{HTML}{09332b}
+\definecolor{OxfordArtsBlog}{HTML}{721627}
+\definecolor{OxfordArtsBlogButton}{HTML}{330d14}
+\definecolor{OxfordBooksBlog}{HTML}{CF7A30}
+\definecolor{OxfordBooksBlogButton}{HTML}{9C4700}
+
+% Graduate country page colours
+%
+% As above, these sections also have their own custom colour schemes to help differentiate them.
+%
+% Colours used in this manner should always be derived from the Oxford colour palette, must compliment the core Oxford blue and never dominate it (to ensure the Oxford brand is always inherent).
+% 
+\definecolor{OxfordGraduateLightBlue}{HTML}{9ECEEB}
+\definecolor{OxfordGraduateBlue}{HTML}{5F9BAF}
+\definecolor{OxfordGraduateNavyBlue}{HTML}{44687D}
+\definecolor{OxfordGraduateGreyBlue}{HTML}{A1C4D0}
+\definecolor{OxfordGraduateDarkGreen}{HTML}{69913B}
+\definecolor{OxfordGraduateLightGreen}{HTML}{AAB300}
+\definecolor{OxfordGraduateOrange}{HTML}{CF7A30}
+\definecolor{OxfordGraduateYellow}{HTML}{F5CF47}
+\definecolor{OxfordGraduateDarkRed}{HTML}{872434}
+\definecolor{OxfordGraduateRed}{HTML}{BE0F34}
+\definecolor{OxfordGraduatePink}{HTML}{EBC4CB}
+\definecolor{OxfordGraduateGrey}{HTML}{A79D96}
+
+% Error colours
+%
+% This is a list of colours that are used for alerts around the site. They should not be used to signify anything else as they are not part of the Oxford palette.
+% 
+\definecolor{OxfordStatus}{HTML}{7dbc23}
+\definecolor{OxfordWarning}{HTML}{bc9a23}
+\definecolor{OxfordError}{HTML}{be0f34}
+\definecolor{OxfordErrorLight}{HTML}{fff0f3}
+
+% Social media colours
+%
+% This is a list of colours that are used for social media buttons around the site. They should not be used to signify anything else as they are not part of the Oxford palette.
+% 
+% TODO: consider how this could be used for a socials slide at the end
+\definecolor{OxfordCherry}{HTML}{be0f34}
+\definecolor{OxfordPurple}{HTML}{ac48bf}
+\definecolor{OxfordRed}{HTML}{C7302B}
+\definecolor{OxfordLightBlue}{HTML}{1daced}
+\definecolor{OxfordDeepBlue}{HTML}{001c3d}
+\definecolor{OxfordLagoonBlue}{HTML}{006599}
+\definecolor{OxfordWeibo}{HTML}{D62A2A}
+\definecolor{OxfordGreen}{HTML}{177770}
+\definecolor{OxfordOrange}{HTML}{FB8113}
+\definecolor{OxfordGooglePlus}{HTML}{d34836}
+\definecolor{OxfordInstagram}{HTML}{517fa4}
+
+% Define beamer colours
+\setbeamercolor{structure}{fg=OxfordLink}
+
+\setbeamercolor{palette primary}{fg=OxfordPrimary}
 \setbeamercolor{palette secondary}{fg=black,bg=OxfordSecondary}
 \setbeamercolor{palette tertiary}{fg=black,bg=OxfordTertiary}
 
-\setbeamercolor{sidebar}{use=structure,bg=OxfordBlue}
-\setbeamercolor{footer}{fg=white,bg=OxfordBlue}
+\setbeamercolor{sidebar}{use=structure,bg=OxfordPrimary}
+\setbeamercolor{footer}{fg=white,bg=OxfordPrimary}
 
-\setbeamercolor{palette sidebar primary}{fg=white,bg=OxfordBlue}
+\setbeamercolor{palette sidebar primary}{fg=white,bg=OxfordPrimary}
 \setbeamercolor{palette sidebar secondary}{fg=white}
 
 \setbeamercolor*{titlelike}{parent=palette primary}
