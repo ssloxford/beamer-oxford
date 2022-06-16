@@ -206,11 +206,19 @@
     \setbeamercolor{subsection name}{fg=OxfordDarkGrey}
 
     % Display only the sidebar logo
-    \setbeamertemplate{sidebar left}{\sidebarlogo}
+    \ifthenelse{\equal{\havesidebar}{true}}%
+      {\setbeamertemplate{sidebar left}{\sidebarlogo}}
+      {}
+
     \setbeamertemplate{footline}{}
     \begin{frame}
       \titlepage
 
     \end{frame}
   }
+
+% Set enumerate style
+\setbeamertemplate{enumerate item}{(\arabic{enumi})}
+\setbeamertemplate{enumerate subitem}{(\alph{enumi})}
+\setbeamertemplate{enumerate subsubitem}{(\roman{enumi})}
 }
