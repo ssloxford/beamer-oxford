@@ -1,3 +1,10 @@
 Write guide on setting up foundry sterling (requiring xelatex for now)
 Write install instructions
 Write makefile
+Properly center sidebar elements
+Work out why there's a <1px gap between sidebar and footer
+Make sidebar disabling mode
+Make font lookup work without xelatex
+    plus oxmathletter style option for which is going to be used
+        this may be improvable
+Add logo for use throughout presentation (maybe in branded blue instead of white)
