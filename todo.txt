@@ -1,0 +1,3 @@
+Write guide on setting up foundry sterling (requiring xelatex for now)
+Write install instructions
+Write makefile

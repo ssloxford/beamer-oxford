@@ -1,0 +1,178 @@
+% TODO: investigate mode specifications for handout and note page generation
+% TODO: fix warnings
+
+\ProvidesPackage{beamerthemeOxford}[2022/06/15]
+\RequirePackage{ifthen}
+
+\def\havefoundrysterling{true}
+\DeclareOption{nofoundrysterling}{\def\havefoundrysterling{false}}
+\ProcessOptions
+
+% TODO: Tidy leftover Hannover package stuff
+\DeclareOptionBeamer{width}
+{\PassOptionsToPackage{width=#1}{beamerouterthemesidebar}}
+
+\DeclareOptionBeamer{hideothersubsections}
+{\PassOptionsToPackage{hideothersubsections=#1}{beamerouterthemesidebar}}
+
+\DeclareOptionBeamer{hideallsubsections}
+{\PassOptionsToPackage{hideallsubsections=#1}{beamerouterthemesidebar}}
+
+\ProcessOptionsBeamer
+
+
+% Only set these variables in presentation mode (from Hannover theme)
+\mode<presentation>
+  % TODO: apparently there's a dark mode we could use?
+  \useoutertheme[height=0pt,left]{sidebar}
+  \usecolortheme{Oxford}
+  \useinnertheme{circles}
+  \setbeamertemplate{frametitle}[default][right]
+  % TODO: should more stuff be added in here?
+\mode
+<all> % TODO: what's this line for?
+
+% Get rid of navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Set font
+\usepackage{fontspec}
+\ifthenelse{\equal{\havefoundrysterling}{true}}%
+  {\setsansfont{FoundrySterling-Book}}
+  {}
+
+% Could set font family like this in the future
+%\newfontfamily{\foundrysterlingbook}{FoundrySterling-Book}
+%\setbeamerfont{title}{family=\fontspec{FoundrySterling-Book}}
+%\setbeamerfont{title}{family=\foundrysterlingbook}
+
+% Redefine vertical navigation to embolden the section heading of active subsections
+\makeatletter
+\def\insertverticalnavigation#1{%
+  \insertlogo
+  \vbox{%
+    \def\sectionentry##1##2##3##4##5{%
+      \ifnum##5=\c@part%
+      \def\insertsectionhead{##2}%
+      \def\insertsectionheadnumber{##1}%
+      \def\insertpartheadnumber{##5}%
+      \hbox to #1{{%
+        \usebeamerfont{section in sidebar}\usebeamercolor[fg]{section in sidebar}%
+          \hyperlink{Navigation##3}{%
+          \ifnum\c@section=##1%
+            \ifnum\c@subsection=0\relax%
+              {\usebeamertemplate{section in sidebar}}%
+            \else%
+              {\usebeamertemplate{section in sidebar}}
+            \fi%
+          \else
+            {\usebeamertemplate{section in sidebar shaded}}%
+          \fi}}}%
+      \beamer@currentsubsection=0\relax\fi}%
+    \def\slideentry##1##2##3##4##5##6{}%
+    \def\beamer@subsectionentry##1##2##3##4##5{%
+      \ifnum##1=\c@part%
+      \def\insertpartheadnumber{##1}%
+      \def\insertsectionheadnumber{##2}%
+      \def\insertsubsectionheadnumber{##3}%
+      \def\insertsubsectionhead{##5}%
+       \beamer@tocifnothide{\ifnum\c@section=##2\ifnum\c@subsection=##3\beamer@nav@css\else\beamer@nav@oss\fi\else\beamer@nav@ooss\fi}%
+      {\hbox{{%
+        \usebeamerfont{subsection in sidebar}\usebeamercolor[fg]{subsection in sidebar}%
+          \hyperlink{Navigation##4}{%
+          \ifnum\c@section=##2%
+            \ifnum\c@subsection=##3%
+              \ifnum\c@subsubsection=0\relax%
+                {\usebeamertemplate{subsection in sidebar}}%
+              \else%
+                {\usebeamertemplate{subsection in sidebar shaded}}%
+              \fi%
+            \else%
+              {\usebeamertemplate{subsection in sidebar shaded}}%
+            \fi%
+          \else%
+            {\usebeamertemplate{subsection in sidebar shaded}}%
+          \fi}}}%
+      }%
+      \fi}%
+    \def\beamer@subsubsectionentry##1##2##3##4##5##6{%
+      \ifnum##1=\c@part%
+      \def\insertpartheadnumber{##1}%
+      \def\insertsectionheadnumber{##2}%
+      \def\insertsubsectionheadnumber{##3}%
+      \def\insertsubsubsectionheadnumber{##4}%
+      \def\insertsubsubsectionhead{##6}%
+      \beamer@tocifnothide{\ifnum\c@section=##2\ifnum\c@subsection=##3\ifnum\c@subsubsection=##4\beamer@nav@css\else\beamer@nav@oss\fi\else\beamer@nav@ooss\fi\else\beamer@nav@ooss\fi}%
+      {\hbox{{%
+        \usebeamerfont{subsubsection in sidebar}\usebeamercolor[fg]{subsubsection in sidebar}%
+          \hyperlink{Navigation##5}{%
+          \ifnum\c@section=##2%
+            \ifnum\c@subsection=##3%
+              \ifnum\c@subsubsection=##4%
+                {\usebeamertemplate{subsubsection in sidebar}}%
+              \else
+                {\usebeamertemplate{subsubsection in sidebar shaded}}%
+              \fi%
+            \else%
+              {\usebeamertemplate{subsubsection in sidebar shaded}}%
+            \fi%
+          \else%
+            {\usebeamertemplate{subsubsection in sidebar shaded}}%
+          \fi}}}%
+      }%
+      \fi}%
+    %\beamer@currentsubsection=0\relax%
+    \dohead%
+  }%
+}
+
+% Redefine sidebar to add logo and remove titles
+\setbeamertemplate{sidebar \beamer@sidebarside}
+{
+  \vspace*{0.06cm}
+  \hspace{0.03\beamer@sidebarwidth}
+  \includegraphics[width=0.9\beamer@sidebarwidth]{oxweb-logo-square.png}%
+
+  \beamer@tempdim=\beamer@sidebarwidth%
+  \advance\beamer@tempdim by -6pt%
+  \insertverticalnavigation{\beamer@sidebarwidth}%
+  \vfill
+  \ifx\beamer@sidebarside\beamer@lefttext%
+  \else%
+    \usebeamercolor{normal text}%
+    \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+    \vskip2pt%
+  \fi%
+}%
+
+\makeatother
+
+% Make sidebar section font bold
+\setbeamerfont{section in sidebar}{series=\bfseries}
+
+
+% Make footer
+\setbeamertemplate{footline}{
+    \begin{beamercolorbox}[wd=\paperwidth,ht=0.15in,dp=1ex,center]{footer}
+        \insertshorttitle\hfill
+        \insertframenumber\hfill
+        \insertshortauthor\ --\ \insertshortdate
+        % TODO: insert the conference name
+        %\insertshortdate\hspace{1em}
+    \end{beamercolorbox}
+}
+
+
+%write the date in the form 1st July 2010 rather than July 1, 2010
+\renewcommand{\today}{%
+  \ifcase\day\or
+  1st\or 2nd\or 3rd\or 4th\or 5th\or
+  6th\or 7th\or 8th\or 9th\or 10th\or
+  11th\or 12th\or 13th\or 14th\or 15th\or
+  16th\or 17th\or 18th\or 19th\or 20th\or
+  21st\or 22nd\or 23rd\or 24th\or 25th\or
+  26th\or 27th\or 28th\or 29th\or 30th\or
+  31st\fi~\ifcase\month\or January\or February\or March\or
+  April\or May\or June\or July\or August\or September\or October\or
+  November\or December\fi \space \number\year%
+}

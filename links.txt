@@ -1,0 +1,2 @@
+https://www.maths.ox.ac.uk/members/it/faqs/latex/thesis-class
+https://www.maths.ox.ac.uk/system/files/legacy/2691/oxmathletter.cls
