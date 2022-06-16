@@ -7,17 +7,15 @@
 %% Use any fonts you like.
 %\usepackage{helvet}
 
-\title[short title]{Gelugor, a Beamer Theme for USM}
+\title{Gelugor, a Beamer Theme for USM}
 \subtitle{Yet Another Grassroot Effort}
 \author{Lim Lian Tze}
 \date{\today}
-\institute{\url{liantze@gmail.com}\\\url{http://liantze.penguinattack.org/}}
+\institute[testing]{\url{liantze@gmail.com}\\\url{http://liantze.penguinattack.org/}}
 
 \begin{document}
 
-\begin{frame}[plain,t]
-\titlepage
-\end{frame}
+\maketitle
 
 
 \section{Introduction}
@@ -39,6 +37,19 @@
 	\item[Research] the scientific pursuit for knowledge
 	\end{description}
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Enumeration}
+  \begin{enumerate}
+    \item item one
+      \begin{enumerate}
+        \item inner item
+          \begin{enumerate}
+            \item inner inner item
+          \end{enumerate}
+      \end{enumerate}
+  \end{enumerate}
 \end{frame}
 
 \subsection{Text}
