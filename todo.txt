@@ -1,4 +1,7 @@
 Work out why there's a <1px gap between sidebar and footer
+Fix \emph text - it's probably the font we're using
+    does it need redefining?
+    \textit doesn't seem to work either
 
 Medium term
     * Write guide on setting up foundry sterling (requiring xelatex for now)
