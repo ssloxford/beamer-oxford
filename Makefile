@@ -1,6 +1,8 @@
+TEXMFHOME=$(shell kpsewhich -var-value TEXMFHOME)
+
 .PHONY: all clean example install
 install:
-		install -D -m 644 -t ~/texmf/tex/latex/oxford/ \
+		install -D -m 644 -t $(TEXMFHOME)/tex/latex/oxford/ \
 			beamerthemeOxford.sty beamercolorthemeOxford.sty oxweb-logo-square.png
 
 all: example
