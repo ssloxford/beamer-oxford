@@ -47,8 +47,12 @@
 % Set font
 \usepackage{fontspec}
 \ifthenelse{\equal{\havefoundrysterling}{true}}%
-  {\setsansfont{FoundrySterling-Book}}
+  {\setsansfont[
+    BoldFont={FoundrySterling-Bold},
+    ItalicFont={FoundrySterling-BookItalic}
+  ]{FoundrySterling-Book}}
   {}
+\usefonttheme[onlymath]{serif}
 
 % Redefine vertical navigation to embolden the section heading of active subsections
 \makeatletter
