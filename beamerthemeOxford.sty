@@ -233,3 +233,9 @@
 \setbeamertemplate{enumerate subitem}{(\alph{enumi})}
 \setbeamertemplate{enumerate subsubitem}{(\roman{enumi})}
 }
+
+% Make notes pdf when compiled with `-jobname notes`
+\expandafter\ifstrequal\expandafter{\jobname}{notes}{
+  \setbeameroption{show only notes}
+}{
+}

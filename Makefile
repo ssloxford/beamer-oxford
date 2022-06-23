@@ -9,6 +9,7 @@ all: example
 
 example:
 	xelatex example.tex
+	xelatex -jobname notes example.tex
 
 clean:
 	rm *.aux *.bbl *.blg *.log *.nav *.out *.snm *.toc *.pdf
