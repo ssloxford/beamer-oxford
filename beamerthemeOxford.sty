@@ -16,6 +16,9 @@
 \def\havefootline{true}
 \DeclareOptionBeamer{hidefootline}{\def\havefootline{false}}
 
+\def\haveframenumber{true}
+\DeclareOptionBeamer{hideframenumber}{\def\haveframenumber{false}}
+
 \DeclareOptionBeamer{sidebarwidth}
 {\PassOptionsToPackage{width=#1}{beamerouterthemesidebar}}
 
@@ -176,19 +179,31 @@
 
 % Make footer
 \ifthenelse{\equal{\havefootline}{true}}%
-{
+{%
   \setbeamertemplate{footline}{%
     \begin{beamercolorbox}[wd=\paperwidth,ht=0.15in,dp=0.075in,leftskip=0.5cm,rightskip=0.5cm]{footer}%
       \insertshorttitle\hfill%
-      \insertframenumber\hfill%
+      \ifthenelse{\equal{\haveframenumber}{true}}%
+      {%
+        \insertframenumber\hfill%
+      }%
+      {}%
       \insertshortauthor~~\insertshortinstitute
       % TODO: insert the conference name
       %\insertshortdate\hspace{1em}
     \end{beamercolorbox}%
   }%
 }%
-{}%
-
+{
+  \ifthenelse{\equal{\haveframenumber}{true}}%
+  {%
+    \setbeamertemplate{footline}{}
+    \setbeamertemplate{page number in head/foot}[framenumber]
+    \setbeamertemplate{navigation symbols}{\footnotesize\usebeamertemplate{page number in head/foot}\vspace{0.2em}}
+    \addtocounter{framenumber}{-1}
+  }%
+  {}%
+}%
 
 % Write the date in the form 1st July 2010 rather than July 1, 2010
 \renewcommand{\today}{%
