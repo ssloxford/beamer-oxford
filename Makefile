@@ -5,11 +5,13 @@ install:
 		install -D -m 644 -t $(TEXMFHOME)/tex/latex/oxford/ \
 			beamerthemeOxford.sty beamercolorthemeOxford.sty oxweb-logo-square.png
 
-all: example
+all: example example-notes
 
-example:
-	xelatex example.tex
-	xelatex -jobname notes example.tex
+example: example.tex
+	latexmk -f -interaction=nonstopmode -pdf example.tex
+
+example-notes: example.tex
+	latexmk -f -interaction=nonstopmode -pdf -jobname=notes example.tex
 
 clean:
-	rm *.aux *.bbl *.blg *.log *.nav *.out *.snm *.toc *.pdf
+	rm -rf *.aux *.bcf *.lof *.log *.out *.run.xml *.toc *.bbl *.blg *.fdb_latexmk *.fls *.nav *.snm *.synctex.gz *.vrb
