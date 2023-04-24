@@ -28,10 +28,17 @@
 \DeclareOptionBeamer{hideallsubsections}
 {\PassOptionsToPackage{hideallsubsections=#1}{beamerouterthemesidebar}}
 
+\def\postermode{false}
+\DeclareOptionBeamer{postermode}{
+  \def\postermode{true}
+  \def\havesidebar{false}
+  \def\havefootline{false}
+  \def\haveframenumber{false}
+}
+
 \ProcessOptionsBeamer
 
-
-% Only set these variables in presentation mode (from Hannover theme)
+% Only set these variables in presentation mode
 \mode<presentation>
   % TODO: apparently there's a dark mode we could use?
   \ifthenelse{\equal{\havesidebar}{true}}%
@@ -40,12 +47,7 @@
   \usecolortheme{Oxford}
   \useinnertheme{circles}
   \setbeamertemplate{frametitle}[default][right]
-  % TODO: should more stuff be added in here?
-\mode
-<all> % TODO: what's this line for?
-
-% Get rid of navigation symbols
-\setbeamertemplate{navigation symbols}{}
+\mode<all>
 
 % Set font
 \usepackage{fontspec}
@@ -56,6 +58,134 @@
   ]{FoundrySterling-Book}}
   {}
 \usefonttheme[onlymath]{serif}
+%\newfontfamily\foo[options]{FoundrySterling-MediumExpert}
+
+% Set these variables in poster mode
+\ifthenelse{\equal{\postermode}{true}}%
+  {
+    \usecaptiontemplate{\small\structure{\insertcaptionname~\insertcaptionnumber: }\insertcaption} % A fix for figure numbering TODO: required?
+ 
+    \setbeamerfont{footline}{size=\large,series=\tt}
+    %\setbeamerfont{block title}{size=\large,series=\bf}
+    %\setbeamerfont{title in headline}{size=\large,family=\foo}
+
+%    \setbeamertemplate{block begin}{
+%      \vskip.75ex
+%      \begin{beamercolorbox}[ht=3.5ex,dp=0.5ex,center,leftskip=-1em,colsep*=.75ex]{block title}%
+%        \usebeamerfont*{block title}%
+%        \vspace{-7pt}
+%        {\hspace{-21pt}\phantom{Gg}\insertblocktitle}% phantom because of baseline problem
+%      \end{beamercolorbox}%
+%      {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+%      \usebeamerfont{block body}%
+%      \begin{beamercolorbox}[leftskip=10pt,colsep*=.75ex,sep=0.5ex,vmode]{block body}%
+%        \justifying
+%        \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+%      }
+%      \setbeamertemplate{block end}{
+%      \end{beamercolorbox}
+%    }
+
+    \setbeamertemplate{headline}{  
+      \leavevmode
+      \begin{beamercolorbox}[wd=\paperwidth]{headline}
+        \begin{columns}[T]
+          \begin{column}{.015\paperwidth}
+          \end{column}
+          \begin{column}{.71\paperwidth}
+            \vskip4ex
+             \vspace{20pt}
+            \raggedright
+            {\usebeamerfont{title in headline}\usebeamercolor[fg]{title in headline}\inserttitle}
+            {\usebeamerfont{title in headline}\usebeamercolor[fg]{title in headline}\insertsubtitle}
+            %\usebeamercolor{title in headline}{\color{fg}\LARGE{\inserttitle}\\[1ex]}}
+
+            \vspace{20pt}
+            \usebeamercolor{author in headline}{\color{fg}\large{\insertauthor}\\[1ex]}
+            \vspace{-5pt}
+            \usebeamercolor{institute in headline}{\color{fg}\large{\insertinstitute}\\[1ex]}   
+            \vspace{0pt}
+          \end{column}
+          \begin{column}{.226\paperwidth}
+            \vskip11ex
+            \vspace{-30pt}
+            \begin{center}
+             \hfill
+%              \begin{columns}[T]
+%                \begin{column}{16cm}
+%                  \ifthenelse{\equal{\altlogo}{}}%
+%                    {}%
+%                    {%
+%                      \includegraphics[height=9cm]{\altlogo}%
+%                    }%
+%                \end{column}
+%
+%                \begin{column}{9cm}
+%                \end{column}
+%              \end{columns}
+                  \includegraphics[height=9cm]{oxweb-logo-square.png}
+
+              %\begin{wrapfigure}{r}{0.35\linewidth}
+                %\colorbox{white}{\includegraphics[width=.35\linewidth]{LiU_primary_black}} \\
+                %\includegraphics[width=.35\linewidth]{uppsalalogo.png}
+              %\end{wrapfigure}
+            \end{center}
+            \vskip2ex
+          \end{column}
+          \begin{column}{.02\paperwidth}
+          \end{column}
+        \end{columns}
+        \vskip2ex
+      \end{beamercolorbox}
+
+      \begin{beamercolorbox}[wd=\paperwidth]{lower separation line head}
+        \rule{0pt}{3pt}
+      \end{beamercolorbox}
+    }
+
+    \setbeamertemplate{footline}{
+      \begin{beamercolorbox}[wd=\paperwidth]{upper separation line foot}
+        \rule{0pt}{3pt}
+      \end{beamercolorbox}
+      
+      \leavevmode%
+    %  \begin{beamercolorbox}[ht=2ex,leftskip=1em,rightskip=1em]{author in head/foot}%
+    %    \texttt{\leftfoot}
+    %    \hfill
+    %    \texttt{\rightfoot}
+    %    \vskip1ex
+    %  \end{beamercolorbox}
+      %\vskip0pt%
+      %\begin{beamercolorbox}[wd=\paperwidth]{lower separation line foot}
+      %  \rule{0pt}{3pt}
+      %\end{beamercolorbox}
+    }
+
+
+    \setbeamertemplate{itemize items}[triangle]
+    \setbeamertemplate{itemize item}{\raisebox{0.12ex}{$\blacktriangleright$}\hskip0.1em}
+    \setbeamertemplate{itemize subitem}{\raisebox{0.12ex}{$\triangleright$}\hskip0.1em}
+    % or define your own template using \defbeamertemplate{itemize item}, see beameruserguide.pdf
+
+    % equal font sizes for all levels
+    \setbeamerfont{itemize/enumerate body}{size=\normalsize}
+    \setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+    \setbeamerfont{itemize/enumerate subsubbody}{size=\normalsize}
+
+    % set bibliography style
+    %\setbeamertemplate{bibliography item}[text]
+    %\setbeamercolor{bibliography item}{fg=black,bg=black}
+    %\setbeamercolor{bibliography entry author}{fg=black,bg=black}
+    %\setbeamercolor{bibliography item}{fg=black,bg=black}
+
+    %\setbeamertemplate{bibliography entry title}{}
+    %\setbeamertemplate{bibliography entry location}{}
+    %\setbeamertemplate{bibliography entry note}{}
+  }
+  {}
+
+% Get rid of navigation symbols
+\setbeamertemplate{navigation symbols}{}
 
 % Redefine vertical navigation to embolden the section heading of active subsections
 \makeatletter

@@ -132,8 +132,30 @@
 
 \setbeamercolor*{titlelike}{parent=palette primary}
 
-\setbeamercolor*{separation line}{}
+\setbeamercolor*{separation line}{bg=white}
 \setbeamercolor*{fine separation line}{}
 
-\mode
-<all>
+%% Poster mode
+\definecolor{lightgrey}{rgb}{0.95,0.95,0.95} % Defines the color used for content box headers
+
+\setbeamercolor{headline}{fg=OxfordPrimary,bg=OxfordPrimary}
+\setbeamercolor{footline}{fg=OxfordPrimary,bg=white}
+\setbeamercolor{title in headline}{fg=white}
+\setbeamercolor{author in headline}{fg=white}
+\setbeamercolor{institute in headline}{fg=white}
+
+\setbeamercolor{framesubtitle}{fg=white, bg=OxfordPrimary}
+\setbeamercolor{author in head/foot}{fg=white, bg=OxfordPrimary}
+\setbeamercolor{title in head/foot}{fg=white, bg=OxfordPrimary}
+
+%\setbeamercolor*{normal text}{fg=black, bg=white}
+\setbeamercolor*{block body}{bg=lightgrey,fg=OxfordPrimary}
+\setbeamercolor*{block title}{fg=white,bg=OxfordPrimary}
+\setbeamercolor{upper separation line head}{fg=OxfordPrimary}
+
+\setbeamercolor*{example body}{fg=lightgrey,bg=OxfordPrimary}
+%\setbeamercolor*{example text}{fg=lightgrey,bg=OxfordPrimary}
+\setbeamercolor*{example title}{bg=white,fg=ta2gray}
+
+%\setbeamercolor{structure}{fg=OxfordPrimary}
+\mode<all>
