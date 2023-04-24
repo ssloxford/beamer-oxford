@@ -1,13 +1,1 @@
-*.aux
-*.bbl
-*.blg
-*.log
-*.nav
-*.out
-*.snm
-*.toc
-*.pdf
-*.fdb_latexmk
-*.fls
-*.xdv
-*.synctex.gz
+out/
